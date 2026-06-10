@@ -1,0 +1,880 @@
+Schema	
+Object Type	
+Object Name	
+Script
+Script
+
+  CREATE TABLE "GS_COMPANY" 
+   (	"COMPANY_ID" NUMBER, 
+	"COMP_REGISTRATION_DATE" DATE, 
+	"COMPANY_NAME" VARCHAR2(255), 
+	"ADDREES" VARCHAR2(400), 
+	"COMPANY_PHONE" VARCHAR2(100), 
+	"COMPANY_EMAIL" VARCHAR2(100), 
+	"BZ_COMP_ID" NUMBER, 
+	"BZ_UNIT_ID" NUMBER, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" VARCHAR2(100), 
+	"UPDATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	 PRIMARY KEY ("COMPANY_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_COMPANY_BRANCHES" 
+   (	"BRANCH_ID" NUMBER, 
+	"COMPANY_ID" NUMBER, 
+	"BRANCH_NAME" VARCHAR2(255), 
+	"ADDRESS" VARCHAR2(255), 
+	"CITY" VARCHAR2(100), 
+	"STATE" VARCHAR2(100), 
+	"COUNTRY" VARCHAR2(100), 
+	"POSTAL_CODE" VARCHAR2(20), 
+	"PHONE_NUMBER" VARCHAR2(20), 
+	"EMAIL" VARCHAR2(255), 
+	"BZ_COMP_ID" NUMBER, 
+	"BZ_UNIT_ID" NUMBER, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" VARCHAR2(100), 
+	"UPDATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	 PRIMARY KEY ("BRANCH_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_GOLD_CATAGORY" 
+   (	"CATAGORY_ID" NUMBER, 
+	"CATAGORY_NAME" VARCHAR2(255), 
+	"DESCRIPTION" VARCHAR2(255), 
+	"GS_COMP_ID" NUMBER, 
+	"GS_BRANCH_ID" NUMBER, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" VARCHAR2(100), 
+	"UPDATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	 PRIMARY KEY ("CATAGORY_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_GOLD_CATAGORY_TYPE" 
+   (	"TYPE_ID" NUMBER, 
+	"CATAGORY_ID" NUMBER, 
+	"TYPE_NAME" VARCHAR2(255), 
+	"DESCRIPTION" VARCHAR2(255), 
+	"GS_COMP_ID" NUMBER, 
+	"GS_BRANCH_ID" NUMBER, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" VARCHAR2(100), 
+	"UPDATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	 PRIMARY KEY ("TYPE_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_GOLD_CONVERSION_PARAMETERS" 
+   (	"CONVERSION_ID" NUMBER, 
+	"CENTIGRAMS" NUMBER, 
+	"GRAINS" NUMBER, 
+	"GRAMS" NUMBER, 
+	"KILOGRAMS" NUMBER, 
+	"MILIGRAMS" NUMBER, 
+	"OUNCES_AVOIR" NUMBER, 
+	"OUNCES_TROY" NUMBER, 
+	"PENNY_WEIGHTS" NUMBER, 
+	"POUND_TROY" NUMBER, 
+	"GS_COMPANY_ID" NUMBER, 
+	"GS_BRANCH_ID" NUMBER, 
+	"CREATED_BY" VARCHAR2(200), 
+	"CREATED_DATE" TIMESTAMP (6), 
+	"UPDATED_BY" VARCHAR2(200), 
+	"UPDATED_DATE" TIMESTAMP (6), 
+	 PRIMARY KEY ("CONVERSION_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_GOLD_KARAT_TYPE" 
+   (	"KARAT_ID" NUMBER, 
+	"CATAGORY_ID" NUMBER, 
+	"GOLD_PERCENT" VARCHAR2(255), 
+	"KARAT_VALUE" NUMBER, 
+	"DESCRIPTION" VARCHAR2(255), 
+	"GS_COMP_ID" NUMBER, 
+	"GS_BRANCH_ID" NUMBER, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" VARCHAR2(100), 
+	"UPDATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	"IMPURITY" VARCHAR2(100), 
+	 PRIMARY KEY ("KARAT_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_GOLD_WISE_RATE" 
+   (	"RATE_ID" NUMBER, 
+	"KARAT_ID" NUMBER, 
+	"EFECTIVE_DATE" DATE, 
+	"CURRENCY" VARCHAR2(50), 
+	"RATE" NUMBER, 
+	"LOCATION" VARCHAR2(100), 
+	"GS_COMP_ID" NUMBER, 
+	"GS_BRANCH_ID" NUMBER, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" VARCHAR2(100), 
+	"UPDATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	 PRIMARY KEY ("RATE_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_PURCHASE" 
+   (	"PURCHASE_ID" NUMBER NOT NULL ENABLE, 
+	"SUPPLIER_ID" NUMBER, 
+	"PURCHASE_DATE" DATE, 
+	"TOTAL_AMOUNT" VARCHAR2(200), 
+	"PAYMENT_STATUS" NUMBER, 
+	"GS_COMPANY_ID" NUMBER, 
+	"GS_BRANCH_ID" NUMBER, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" VARCHAR2(100), 
+	"UPDATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	 PRIMARY KEY ("PURCHASE_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_PURCHASE_ITEM" 
+   (	"PURCHASE_ITEM_ID" NUMBER NOT NULL ENABLE, 
+	"PURCHASE_ID" NUMBER, 
+	"CATAGORY_ID" NUMBER, 
+	"TYPE_ID" NUMBER, 
+	"ITEM_DESCRIPTION" VARCHAR2(100), 
+	"QUANTITY" NUMBER, 
+	"UNITPRICE" VARCHAR2(100), 
+	"TOTALPRICE" VARCHAR2(200), 
+	"GS_COMPANY_ID" NUMBER, 
+	"GS_BARANCH_ID" NUMBER, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" VARCHAR2(100), 
+	"UPDATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	 PRIMARY KEY ("PURCHASE_ITEM_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_SALE" 
+   (	"SALE_ID" NUMBER NOT NULL ENABLE, 
+	"SUPPLIER_ID" NUMBER, 
+	"SALE_DATE" DATE, 
+	"TOTAL_AMOUNT" VARCHAR2(200), 
+	"PAYMENT_STATUS" NUMBER, 
+	"GS_COMPANY_ID" NUMBER, 
+	"GS_BRANCH_ID" NUMBER, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" VARCHAR2(100), 
+	"UPDATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	 PRIMARY KEY ("SALE_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_SALE_ITEM" 
+   (	"SALE_ITEM_ID" NUMBER NOT NULL ENABLE, 
+	"SALE_ID" NUMBER, 
+	"CATAGORY_ID" NUMBER, 
+	"TYPE_ID" NUMBER, 
+	"ITEM_DESCRIPTION" VARCHAR2(100), 
+	"QUANTITY" NUMBER, 
+	"UNITPRICE" VARCHAR2(100), 
+	"TOTALPRICE" VARCHAR2(200), 
+	"GS_COMPANY_ID" NUMBER, 
+	"GS_BARANCH_ID" NUMBER, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" VARCHAR2(100), 
+	"UPDATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	 PRIMARY KEY ("SALE_ITEM_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_SUPPLIER" 
+   (	"SUPPLIER_ID" NUMBER NOT NULL ENABLE, 
+	"SUPPLIER_NAME" VARCHAR2(255) NOT NULL ENABLE, 
+	"CONTACT_PERSON_NAME" VARCHAR2(255), 
+	"CONTACT_NUMBER" VARCHAR2(20), 
+	"EMAIL" VARCHAR2(255), 
+	"ADDRESS" VARCHAR2(255), 
+	"CITY" VARCHAR2(100), 
+	"STATE" VARCHAR2(100), 
+	"COUNTRY" VARCHAR2(100), 
+	"POSTAL_CODE" VARCHAR2(20), 
+	"REGISTRATION_DATE" DATE, 
+	"GS_COMP_ID" NUMBER, 
+	"GS_BRANCH_ID" NUMBER, 
+	"CREATED_DATE" DATE, 
+	"CREATED_BY" VARCHAR2(100), 
+	"UPDATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	"SUPPLIER_PHONE_NO" VARCHAR2(100), 
+	"TYPE" VARCHAR2(100), 
+	 PRIMARY KEY ("SUPPLIER_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_USER" 
+   (	"USER_ID" NUMBER NOT NULL ENABLE, 
+	"USER_CODE" VARCHAR2(100), 
+	"USER_NAME" VARCHAR2(100), 
+	"U_PASSWORD" VARCHAR2(100), 
+	"USER_ROLE" NUMBER, 
+	"COMPANY_ID" NUMBER, 
+	"UNIT_ID" NUMBER, 
+	"CREATED_BY" VARCHAR2(100), 
+	"CREATED_DATE" DATE, 
+	"UPDATED_BY" VARCHAR2(100), 
+	"UPDATE_DATE" DATE, 
+	"STATUS" VARCHAR2(50), 
+	 PRIMARY KEY ("USER_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_USER_ROLE" 
+   (	"ID" NUMBER NOT NULL ENABLE, 
+	"ROLE_ID" NUMBER, 
+	"PAGE_ID" NUMBER, 
+	"STATUS" VARCHAR2(10), 
+	"GS_COMPANY_ID" NUMBER, 
+	"GS_BRANCH_ID" NUMBER, 
+	"CREATED_BY" VARCHAR2(400), 
+	"CREATED_DATE" DATE, 
+	"UPDATE_BY" VARCHAR2(400), 
+	"UPDATE_DATE" DATE, 
+	 PRIMARY KEY ("ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE TABLE "GS_USER_ROLE_ERR$" 
+   (	"ORA_ERR_NUMBER$" NUMBER, 
+	"ORA_ERR_MESG$" VARCHAR2(2000), 
+	"ORA_ERR_ROWID$" UROWID (4000), 
+	"ORA_ERR_OPTYP$" VARCHAR2(2), 
+	"ORA_ERR_TAG$" VARCHAR2(2000), 
+	"ID" VARCHAR2(4000), 
+	"ROLE_ID" VARCHAR2(4000), 
+	"PAGE_ID" VARCHAR2(4000), 
+	"STATUS" VARCHAR2(4000), 
+	"GS_COMPANY_ID" VARCHAR2(4000), 
+	"GS_BRANCH_ID" VARCHAR2(4000), 
+	"CREATED_BY" VARCHAR2(4000), 
+	"CREATED_DATE" VARCHAR2(4000), 
+	"UPDATE_BY" VARCHAR2(4000), 
+	"UPDATE_DATE" VARCHAR2(4000)
+   ) ;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_COMPANY_T" 
+    before insert or update  
+    on GS_COMPANY 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.COMPANY_ID is null then
+            select nvl(max(COMPANY_ID),0) + 1 into :NEW.COMPANY_ID from GS_COMPANY;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_COMPANY_T;
+/
+ALTER TRIGGER "GS_COMPANY_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_COMPANY_BRANCHES_T" 
+    before insert or update  
+    on GS_COMPANY_BRANCHES 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.Branch_ID is null then
+            select nvl(max(Branch_ID),0) + 1 into :NEW.Branch_ID from GS_COMPANY_BRANCHES;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_COMPANY_BRANCHES_T;
+/
+ALTER TRIGGER "GS_COMPANY_BRANCHES_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_GOLD_CATAGORY_T" 
+    before insert or update  
+    on GS_GOLD_CATAGORY 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.CATAGORY_ID is null then
+            select nvl(max(CATAGORY_ID),0) + 1 into :NEW.CATAGORY_ID from GS_GOLD_CATAGORY;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_GOLD_CATAGORY_T;
+/
+ALTER TRIGGER "GS_GOLD_CATAGORY_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_GOLD_CATAGORY_TYPE_T" 
+    before insert or update  
+    on GS_GOLD_CATAGORY_TYPE 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.TYPE_ID is null then
+            select nvl(max(TYPE_ID),0) + 1 into :NEW.TYPE_ID from GS_GOLD_CATAGORY_TYPE;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_GOLD_CATAGORY_TYPE_T;
+/
+ALTER TRIGGER "GS_GOLD_CATAGORY_TYPE_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_GOLD_CONVERSION_PARAMETERS_T" 
+    before insert or update  
+    on GS_GOLD_CONVERSION_PARAMETERS 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.CONVERSION_ID is null then
+            select nvl(max(CONVERSION_ID),0) + 1 into :NEW.CONVERSION_ID from GS_GOLD_CONVERSION_PARAMETERS;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_GOLD_CONVERSION_PARAMETERS_T;
+/
+ALTER TRIGGER "GS_GOLD_CONVERSION_PARAMETERS_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_GOLD_KARAT_TYPE_T" 
+    before insert or update  
+    on GS_GOLD_KARAT_TYPE 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.KARAT_ID is null then
+            select nvl(max(KARAT_ID),0) + 1 into :NEW.KARAT_ID from GS_GOLD_KARAT_TYPE;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_GOLD_KARAT_TYPE_T;
+/
+ALTER TRIGGER "GS_GOLD_KARAT_TYPE_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_GOLD_WISE_RATE_T" 
+    before insert or update  
+    on GS_GOLD_WISE_RATE 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.RATE_ID is null then
+            select nvl(max(RATE_ID),0) + 1 into :NEW.RATE_ID from GS_GOLD_WISE_RATE;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_GOLD_WISE_RATE_T;
+/
+ALTER TRIGGER "GS_GOLD_WISE_RATE_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_PURCHASE_T" 
+    before insert or update  
+    on GS_PURCHASE 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.Purchase_ID is null then
+            select nvl(max(Purchase_ID),0) + 1 into :NEW.Purchase_ID from GS_PURCHASE;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_PURCHASE_T;
+/
+ALTER TRIGGER "GS_PURCHASE_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_PURCHASE_ITEM_T" 
+    before insert or update  
+    on GS_PURCHASE_ITEM 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.Purchase_ITEM_ID is null then
+            select nvl(max(Purchase_ITEM_ID),0) + 1 into :NEW.Purchase_ITEM_ID from GS_PURCHASE_ITEM;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_PURCHASE_ITEM_T;
+/
+ALTER TRIGGER "GS_PURCHASE_ITEM_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_SALE_T" 
+    before insert or update  
+    on GS_SALE 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.SALE_ID is null then
+            select nvl(max(SALE_ID),0) + 1 into :NEW.SALE_ID from GS_SALE;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_SALE_T;
+/
+ALTER TRIGGER "GS_SALE_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_SALE_ITEM_T" 
+    before insert or update  
+    on GS_SALE_ITEM 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.SALE_ITEM_ID is null then
+            select nvl(max(SALE_ITEM_ID),0) + 1 into :NEW.SALE_ITEM_ID from GS_SALE_ITEM;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_SALE_ITEM_T;
+/
+ALTER TRIGGER "GS_SALE_ITEM_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_SUPPLIER_T" 
+    before insert or update  
+    on GS_SUPPLIER 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.Supplier_ID is null then
+            select nvl(max(Supplier_ID),0) + 1 into :NEW.Supplier_ID from GS_SUPPLIER;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_SUPPLIER_T;
+/
+ALTER TRIGGER "GS_SUPPLIER_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_USER_T" 
+    BEFORE INSERT OR UPDATE 
+    ON GS_USER
+    FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        IF :NEW.USER_ID IS NULL THEN
+            SELECT NVL(MAX(USER_ID), 0) + 1 INTO :NEW.USER_ID FROM GS_USER;
+        END IF;
+        :NEW.CREATED_DATE := SYSDATE;
+        :NEW.CREATED_BY := COALESCE(SYS_CONTEXT('APEX$SESSION', 'APP_USER'), USER);
+    END IF;
+
+    :NEW.UPDATE_DATE := SYSDATE;
+    :NEW.UPDATED_BY := COALESCE(SYS_CONTEXT('APEX$SESSION', 'APP_USER'), USER);
+END GS_USER_T;
+/
+ALTER TRIGGER "GS_USER_T" ENABLE;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "GS_USER_ROLE_T" 
+before insert or update ON GS_USER_ROLE 
+for each row 
+begin 
+   if inserting then 
+       if :NEW.ID is null then 
+          SELECT NVL(MAX(A.ID),0)+1 INTO :NEW.ID FROM GS_USER_ROLE A ; 
+       end if; 
+           :NEW.CREATED_DATE    := localtimestamp; 
+           :NEW.CREATED_BY := nvl(v('APP_USER'),USER); 
+   end if; 
+   if  updating then 
+      :NEW.UPDATE_DATE    := localtimestamp; 
+      :NEW.UPDATE_BY := nvl(v('APP_USER'),USER); 
+   end if; 
+   end;
+/
+ALTER TRIGGER "GS_USER_ROLE_T" ENABLE;
+
+   COMMENT ON TABLE "GS_USER_ROLE_ERR$"  IS 'DML Error Logging table for "GS_USER_ROLE"';
+create or replace function GS_GET_CURRENT_STOCK(P_TYPE_ID NUMBER,P_GS_COMPANY_ID NUMBER,	P_GS_BARANCH_ID NUMBER)
+RETURN NUMBER
+IS 
+V_STOCK NUMBER;
+BEGIN
+    SELECT NVL(GS_GET_PURCHASE_QTY(P_TYPE_ID,P_GS_COMPANY_ID,P_GS_BARANCH_ID),0)-NVL(GS_GET_SALE_QTY(P_TYPE_ID,P_GS_COMPANY_ID,P_GS_BARANCH_ID),0) INTO V_STOCK FROM DUAL;
+    RETURN V_STOCK;
+END;
+/
+create or replace function GS_GET_CURRENT_STOCK_DATE_WISE(P_TYPE_ID NUMBER,P_GS_COMPANY_ID NUMBER,	P_GS_BARANCH_ID NUMBER,P_FROM DATE,P_TO DATE)
+RETURN NUMBER
+IS 
+V_STOCK NUMBER;
+BEGIN
+    SELECT NVL(GS_GET_PURCHASE_QTY_DATE_WISE(P_TYPE_ID,P_GS_COMPANY_ID,P_GS_BARANCH_ID,P_FROM,P_TO),0)-NVL(GS_GET_SALE_QTY_DATE_WISE(P_TYPE_ID,P_GS_COMPANY_ID,P_GS_BARANCH_ID,P_FROM,P_TO),0) INTO V_STOCK FROM DUAL;
+    RETURN V_STOCK;
+END;
+/
+create or replace function GS_GET_PURCHASE_QTY(P_TYPE_ID NUMBER,P_GS_COMPANY_ID NUMBER,	P_GS_BARANCH_ID NUMBER)
+RETURN NUMBER
+IS 
+V_STOCK NUMBER;
+BEGIN
+    SELECT SUM(NVL(QUANTITY,0)) INTO V_STOCK FROM GS_GOLD_CATAGORY_TYPE GC, GS_PURCHASE_ITEM PI 
+    WHERE GC.TYPE_ID = PI.TYPE_ID AND PI.GS_COMPANY_ID = P_GS_COMPANY_ID AND PI.GS_BARANCH_ID = P_GS_BARANCH_ID AND  GC.TYPE_ID = P_TYPE_ID;
+    RETURN V_STOCK;
+END;
+/
+create or replace function GS_GET_PURCHASE_QTY_DATE_WISE(P_TYPE_ID NUMBER,P_GS_COMPANY_ID NUMBER,	P_GS_BARANCH_ID NUMBER,P_FROM DATE,P_TO DATE)
+RETURN NUMBER
+IS 
+V_STOCK NUMBER;
+BEGIN
+    SELECT SUM(NVL(QUANTITY,0)) INTO V_STOCK  FROM GS_GOLD_CATAGORY_TYPE GC, GS_PURCHASE GP ,GS_PURCHASE_ITEM PI 
+    WHERE GC.TYPE_ID = PI.TYPE_ID 
+    AND GP.PURCHASE_ID = PI.PURCHASE_ID
+    AND PI.GS_COMPANY_ID = P_GS_COMPANY_ID
+    AND PI.GS_BARANCH_ID = P_GS_BARANCH_ID
+    AND  GC.TYPE_ID = P_TYPE_ID
+    AND GP.PURCHASE_DATE BETWEEN P_FROM AND P_TO;
+    RETURN V_STOCK;
+END;
+/
+create or replace function GS_GET_SALE_QTY(P_TYPE_ID NUMBER,P_GS_COMPANY_ID NUMBER,	P_GS_BARANCH_ID NUMBER)
+RETURN NUMBER
+IS 
+V_STOCK NUMBER;
+BEGIN
+    SELECT SUM(NVL(QUANTITY,0)) INTO V_STOCK FROM GS_GOLD_CATAGORY_TYPE GC, GS_SALE_ITEM SI 
+    WHERE GC.TYPE_ID = SI.TYPE_ID AND SI.GS_COMPANY_ID = P_GS_COMPANY_ID AND SI.GS_BARANCH_ID = P_GS_BARANCH_ID AND GC.TYPE_ID = P_TYPE_ID;
+    RETURN V_STOCK;
+END;
+/
+create or replace function GS_GET_SALE_QTY_DATE_WISE(P_TYPE_ID NUMBER,P_GS_COMPANY_ID NUMBER,	P_GS_BARANCH_ID NUMBER,P_FROM DATE,P_TO DATE)
+RETURN NUMBER
+IS 
+V_STOCK NUMBER;
+BEGIN
+    SELECT SUM(NVL(QUANTITY,0)) INTO V_STOCK FROM GS_GOLD_CATAGORY_TYPE GC, GS_SALE GS, GS_SALE_ITEM SI 
+    WHERE GC.TYPE_ID = SI.TYPE_ID 
+    AND GS.SALE_ID = SI.SALE_ID
+    AND SI.GS_COMPANY_ID = P_GS_COMPANY_ID 
+    AND SI.GS_BARANCH_ID = P_GS_BARANCH_ID 
+    AND GC.TYPE_ID = P_TYPE_ID
+    AND GS.SALE_DATE BETWEEN P_FROM AND P_TO;
+    RETURN V_STOCK;
+END;
+/
+create or replace function GS_get_user_id_by_username(p_id varchar2)
+return  NUMBER is
+v_userid NUMBER;
+begin
+    select user_id INTO v_userid from GS_USER where UPPER(user_name) = UPPER(p_id);
+    return v_userid;
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create or replace TRIGGER "GS_COMPANY_BRANCHES_T" 
+    before insert or update  
+    on GS_COMPANY_BRANCHES 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.Branch_ID is null then
+            select nvl(max(Branch_ID),0) + 1 into :NEW.Branch_ID from GS_COMPANY_BRANCHES;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_COMPANY_BRANCHES_T;
+/
+create or replace TRIGGER "GS_COMPANY_T" 
+    before insert or update  
+    on GS_COMPANY 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.COMPANY_ID is null then
+            select nvl(max(COMPANY_ID),0) + 1 into :NEW.COMPANY_ID from GS_COMPANY;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_COMPANY_T;
+/
+create or replace TRIGGER "GS_GOLD_CATAGORY_T" 
+    before insert or update  
+    on GS_GOLD_CATAGORY 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.CATAGORY_ID is null then
+            select nvl(max(CATAGORY_ID),0) + 1 into :NEW.CATAGORY_ID from GS_GOLD_CATAGORY;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_GOLD_CATAGORY_T;
+/
+create or replace TRIGGER "GS_GOLD_CATAGORY_TYPE_T" 
+    before insert or update  
+    on GS_GOLD_CATAGORY_TYPE 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.TYPE_ID is null then
+            select nvl(max(TYPE_ID),0) + 1 into :NEW.TYPE_ID from GS_GOLD_CATAGORY_TYPE;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_GOLD_CATAGORY_TYPE_T;
+/
+create or replace TRIGGER "GS_GOLD_CONVERSION_PARAMETERS_T" 
+    before insert or update  
+    on GS_GOLD_CONVERSION_PARAMETERS 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.CONVERSION_ID is null then
+            select nvl(max(CONVERSION_ID),0) + 1 into :NEW.CONVERSION_ID from GS_GOLD_CONVERSION_PARAMETERS;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_GOLD_CONVERSION_PARAMETERS_T;
+/
+create or replace TRIGGER "GS_GOLD_KARAT_TYPE_T" 
+    before insert or update  
+    on GS_GOLD_KARAT_TYPE 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.KARAT_ID is null then
+            select nvl(max(KARAT_ID),0) + 1 into :NEW.KARAT_ID from GS_GOLD_KARAT_TYPE;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_GOLD_KARAT_TYPE_T;
+/
+create or replace TRIGGER "GS_GOLD_WISE_RATE_T" 
+    before insert or update  
+    on GS_GOLD_WISE_RATE 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.RATE_ID is null then
+            select nvl(max(RATE_ID),0) + 1 into :NEW.RATE_ID from GS_GOLD_WISE_RATE;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_GOLD_WISE_RATE_T;
+/
+create or replace TRIGGER "GS_PURCHASE_ITEM_T" 
+    before insert or update  
+    on GS_PURCHASE_ITEM 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.Purchase_ITEM_ID is null then
+            select nvl(max(Purchase_ITEM_ID),0) + 1 into :NEW.Purchase_ITEM_ID from GS_PURCHASE_ITEM;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_PURCHASE_ITEM_T;
+/
+create or replace TRIGGER "GS_PURCHASE_T" 
+    before insert or update  
+    on GS_PURCHASE 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.Purchase_ID is null then
+            select nvl(max(Purchase_ID),0) + 1 into :NEW.Purchase_ID from GS_PURCHASE;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_PURCHASE_T;
+/
+create or replace TRIGGER "GS_SALE_ITEM_T" 
+    before insert or update  
+    on GS_SALE_ITEM 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.SALE_ITEM_ID is null then
+            select nvl(max(SALE_ITEM_ID),0) + 1 into :NEW.SALE_ITEM_ID from GS_SALE_ITEM;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_SALE_ITEM_T;
+/
+create or replace TRIGGER "GS_SALE_T" 
+    before insert or update  
+    on GS_SALE 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.SALE_ID is null then
+            select nvl(max(SALE_ID),0) + 1 into :NEW.SALE_ID from GS_SALE;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_SALE_T;
+/
+create or replace TRIGGER "GS_SUPPLIER_T" 
+    before insert or update  
+    on GS_SUPPLIER 
+    for each row 
+begin 
+    if inserting then 
+        if :NEW.Supplier_ID is null then
+            select nvl(max(Supplier_ID),0) + 1 into :NEW.Supplier_ID from GS_SUPPLIER;
+        end if;
+        :new.created_date := sysdate; 
+        :new.created_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+    end if; 
+    :new.updated_date := sysdate; 
+    :new.updated_by := coalesce(sys_context('APEX$SESSION','APP_USER'),user); 
+end GS_SUPPLIER_T;
+/
+create or replace TRIGGER "GS_USER_ROLE_T" 
+before insert or update ON GS_USER_ROLE 
+for each row 
+begin 
+   if inserting then 
+       if :NEW.ID is null then 
+          SELECT NVL(MAX(A.ID),0)+1 INTO :NEW.ID FROM GS_USER_ROLE A ; 
+       end if; 
+           :NEW.CREATED_DATE    := localtimestamp; 
+           :NEW.CREATED_BY := nvl(v('APP_USER'),USER); 
+   end if; 
+   if  updating then 
+      :NEW.UPDATE_DATE    := localtimestamp; 
+      :NEW.UPDATE_BY := nvl(v('APP_USER'),USER); 
+   end if; 
+   end;
+/
+create or replace TRIGGER "GS_USER_T" 
+    BEFORE INSERT OR UPDATE 
+    ON GS_USER
+    FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        IF :NEW.USER_ID IS NULL THEN
+            SELECT NVL(MAX(USER_ID), 0) + 1 INTO :NEW.USER_ID FROM GS_USER;
+        END IF;
+        :NEW.CREATED_DATE := SYSDATE;
+        :NEW.CREATED_BY := COALESCE(SYS_CONTEXT('APEX$SESSION', 'APP_USER'), USER);
+    END IF;
+
+    :NEW.UPDATE_DATE := SYSDATE;
+    :NEW.UPDATED_BY := COALESCE(SYS_CONTEXT('APEX$SESSION', 'APP_USER'), USER);
+END GS_USER_T;
+/
